@@ -38,7 +38,16 @@ export default function RootLayout({
           enableSystem
           disableTransitionOnChange
         >
-          {children}
+          <SidebarProvider>
+            <AppSidebar />
+            <main className="flex flex-1 flex-col gap-4 p-4 pt-0 w-full h-screen">
+              <div className="flex gap-3 items-center">
+                <SidebarTrigger />
+                <ModeToggle />
+              </div>
+              {children}
+            </main>
+          </SidebarProvider>
         </ThemeProvider>
       </body>
     </html>
