@@ -1,12 +1,10 @@
-import { Geist, Geist_Mono } from "next/font/google";
-// import { ThemeProvider } from "@/components/theme-provider";
-// import { SessionProvider } from "next-auth/react";
 import "./globals.css";
-import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
-import { AppSidebar } from "@/components/app-sidebar";
 import { NavUser } from "@/components/nav-user";
+import { Geist, Geist_Mono } from "next/font/google"
+import { AppSidebar } from "@/components/app-sidebar";
 import { ModeToggle } from "@/components/mode-toogle";
 import { Providers } from "@/components/ui/provider";
+import { SidebarInset, SidebarTrigger } from "@/components/ui/sidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
