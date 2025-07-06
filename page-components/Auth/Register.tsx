@@ -2,10 +2,11 @@
 
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Select from "@/components/select";
 import { Button } from "@/components/ui/button";
+import { api } from "@/lib/api";
 
 export function Register({
     className,
@@ -14,9 +15,32 @@ export function Register({
     const [name, setName] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [isActive, setIsActive] = useState<string>('')
+    const [role, setRole] = useState<string>('')
 
-    const handleRegister  = async () => {
-        
+    const handleRegister = async () => {
+        const payload = {
+            name,
+            password,
+            isActive,
+            role
+        }
+
+        console.log('payload', payload)
+
+        try {
+            const response = await api.post('auth/register', payload)
+
+            const { message, status } = response.data
+            console.log('response', response.data)
+            status && alert(message)
+        } catch (error) {
+            alert(error)
+        } finally {
+            setName('')
+            setRole('')
+            setPassword('')
+            setIsActive('')
+        }
     }
 
     return (
@@ -38,6 +62,7 @@ export function Register({
                                         type="text"
                                         id="name"
                                         placeholder="James"
+                                        onChange={(e) => setName(e.target.value)}
                                     />
                                 </div>
                                 <div className="grid gap-3">
@@ -46,10 +71,11 @@ export function Register({
                                         type="password"
                                         id="password"
                                         placeholder="********"
+                                        onChange={(e) => setPassword(e.target.value)}
                                     />
                                 </div>
                                 <div className="grid gap-3">
-                                    <Label htmlFor="name">Password</Label>
+                                    <Label htmlFor="name">Role</Label>
                                     <Select
                                         options={
                                             [
@@ -59,7 +85,7 @@ export function Register({
                                             ]
                                         }
                                         placeholder="Select role"
-                                    // onChange={(e) => console.log(e)}
+                                        onChange={(e) => setRole(e)}
                                     />
                                 </div>
                                 <div className="grid gap-3">
@@ -72,11 +98,13 @@ export function Register({
                                             ]
                                         }
                                         placeholder="Select status"
+                                        onChange={(e) => setIsActive(e)}
                                     />
                                 </div>
                                 <div className="flex flex-col gap-3">
                                     <Button
-                                        type="submit"
+                                        onClick={handleRegister}
+                                        type="button"
                                         className="w-full"
                                     >
                                         Register

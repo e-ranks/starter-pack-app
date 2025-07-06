@@ -8,10 +8,13 @@ const handler = apiHandler().post(async (req: NextRequest): Promise<Response> =>
     const body = await req.json()
     const { name, email, password, role, isActive, allowedPaths, image, defaultPath } = body
 
-    if (!name || !email || !password || !role || !isActive || !defaultPath) return NextResponse.json({
-        message: `${name || email || password || role || isActive} is required`,
-        status: false
-    })
+    if (!name || !password || !role || !isActive) return NextResponse.json(
+        {
+            message: 'Missing required fields',
+            status: false
+        },
+        { status: 400 }
+    )
 
     try {
         await dbConnect()
