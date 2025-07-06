@@ -58,8 +58,8 @@ export function Register({
                                     <Select
                                         options={
                                             [
-                                                { label: 'Active', value: true },
-                                                { label: 'Inactive', value: false }
+                                                { label: 'Active', value: 'active' },
+                                                { label: 'Inactive', value: 'inactive' }
                                             ]
                                         }
                                         placeholder="Select status"

@@ -5,7 +5,7 @@ import { ChevronDown } from 'lucide-react'
 
 type Option = {
     label: string
-    value: string | boolean
+    value: string
 }
 
 type CustomSelectProps = {
