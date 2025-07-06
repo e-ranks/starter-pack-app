@@ -61,7 +61,7 @@ export function LoginForm({
                     <CardHeader>
                         <CardTitle>Login to your account</CardTitle>
                         <CardDescription>
-                            Enter your email below to login to your account
+                            Enter your name below to login to your account
                         </CardDescription>
                     </CardHeader>
                     <CardContent>
@@ -79,24 +79,16 @@ export function LoginForm({
                                     />
                                 </div>
                                 <div className="grid gap-3">
-                                    <div className="flex items-center">
-                                        <Label htmlFor="password">Password</Label>
-                                        <a
-                                            href="#"
-                                            className="ml-auto inline-block text-sm underline-offset-4 hover:underline"
-                                        >
-                                            Forgot your password?
-                                        </a>
-                                    </div>
+                                    <Label htmlFor="password">Password</Label>
                                     <Input
                                         id="password"
                                         type="password"
-                                        placeholder="Password"
+                                        placeholder="*******"
                                         onChange={(e) => setPassword(e.target?.value)}
                                         required
                                     />
                                 </div>
-                                <div className="flex flex-col gap-3">
+                                <div className="flex flex-col gap-3 mt-4">
                                     <Button
                                         onClick={handleLogin}
                                         type="button"
@@ -104,14 +96,11 @@ export function LoginForm({
                                     >
                                         Login
                                     </Button>
-                                    <Button variant="outline" className="w-full">
-                                        Login with Google
-                                    </Button>
                                 </div>
                             </div>
                             <div className="mt-4 text-center text-sm">
                                 Don&apos;t have an account?{" "}
-                                <a href="#" className="underline underline-offset-4">
+                                <a href="/auth/register" className="ml-2 font-medium">
                                     Sign up
                                 </a>
                             </div>

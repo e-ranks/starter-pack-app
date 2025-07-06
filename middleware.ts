@@ -4,8 +4,20 @@ import { NextResponse, type NextRequest } from "next/server";
 const PUBLIC_PATHS = ["/", "/auth/login", "/auth/register"];
 
 const ROLE_ACCESS: Record<string, string[]> = {
-    admin: ["/dashboard", "/users", "/admin", "/auth/login", '/forbidden', '/not-found'],
-    operator: ["/dashboard", "/operator"],
+    admin: [
+        "/dashboard",
+        "/users",
+        "/admin",
+        "/auth/login",
+        '/forbidden',
+        '/not-found',
+        '/register',
+        '/auth/register'
+    ],
+    operator: [
+        "/dashboard",
+        "/operator"
+    ],
     guest: ["/dashboard"],
 }
 
@@ -14,7 +26,8 @@ const AVAILABLE_MENUS = [
     '/test',
     '/auth/login',
     '/forbidden',
-    '/not-found'
+    '/not-found',
+    '/auth/register',
 ]
 
 export async function middleware(req: NextRequest) {
