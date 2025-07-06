@@ -7,12 +7,12 @@ import {
     CardContent,
     CardDescription,
 } from "@/components/ui/card"
-import React, { useState } from "react"
-import { signIn, getSession } from "next-auth/react"
 import { redirect } from "next/navigation"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
+import React, { useEffect, useState } from "react"
+import { signIn, getSession } from "next-auth/react"
 
 export function LoginForm({
     className,
@@ -20,6 +20,22 @@ export function LoginForm({
 }: React.ComponentProps<"div">) {
     const [name, setName] = useState<string>('')
     const [password, setPassword] = useState<string>('')
+    const [checkingSession, setCheckingSession] = useState<boolean>(true)
+
+    useEffect(() => {
+        const checkSession = async () => {
+            const session = await getSession()
+
+            if (session) {
+                const path = session.user.defaultPath || '/'
+                return redirect(path)
+            }
+
+            return setCheckingSession(false)
+        }
+
+        checkSession()
+    }, [])
 
     const handleLogin = async () => {
         const res = await signIn('credentials', {
@@ -35,6 +51,8 @@ export function LoginForm({
         }
         alert(res?.error)
     }
+
+    if (checkingSession) return null
 
     return (
         <div className="flex flex-col flex-1 items-center justify-center">
