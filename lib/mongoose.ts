@@ -19,6 +19,7 @@ async function dbConnect() {
     }
 
     cached.conn = await cached.promise
+    console.log('[DEBUG] DB CONNECTED')
     return cached.conn
 }
 

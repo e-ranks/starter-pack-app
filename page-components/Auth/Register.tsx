@@ -1,6 +1,8 @@
+'use client'
+
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import React from "react";
+import React, { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import Select from "@/components/select";
 import { Button } from "@/components/ui/button";
@@ -9,6 +11,13 @@ export function Register({
     className,
     ...props
 }: React.ComponentProps<'div'>) {
+    const [name, setName] = useState<string>('')
+    const [password, setPassword] = useState<string>('')
+    const [isActive, setIsActive] = useState<string>('')
+
+    const handleRegister  = async () => {
+        
+    }
 
     return (
         <div className="flex flex-col flex-1  items-center justify-center">
