@@ -6,9 +6,9 @@ import { NextRequest, NextResponse } from "next/server"
 
 const handler = apiHandler().post(async (req: NextRequest): Promise<Response> => {
     const body = await req.json()
-    const { name, email, password, role, isActive, allowedPaths, image } = body
+    const { name, email, password, role, isActive, allowedPaths, image, defaultPath } = body
 
-    if (!name || !email || !password || !role || !isActive) return NextResponse.json({
+    if (!name || !email || !password || !role || !isActive || !defaultPath) return NextResponse.json({
         message: `${name || email || password || role || isActive} is required`,
         status: false
     })
@@ -31,12 +31,13 @@ const handler = apiHandler().post(async (req: NextRequest): Promise<Response> =>
 
         const user = await User.create({
             name,
-            email,
-            password: hashedPassword,
             role,
+            email,
+            image,
             isActive,
+            defaultPath: `/${defaultPath}`,
             allowedPaths,
-            image
+            password: hashedPassword,
         })
 
         return NextResponse.json(

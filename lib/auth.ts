@@ -10,7 +10,7 @@ export const authOptions: AuthOptions = {
         CredentialsProvider({
             name: 'Credentials',
             credentials: {
-                name: { label: 'name', type: 'name' },
+                name: { label: 'Name', type: 'name' },
                 password: { label: 'Password', type: 'password' }
             },
             async authorize(credentials) {
@@ -27,9 +27,10 @@ export const authOptions: AuthOptions = {
                 return {
                     id: user._id,
                     name: user.name,
-                    email: user.email,
                     role: user.role,
+                    email: user.email,
                     image: user?.image,
+                    defaultPath: user?.defaultPath,
                     allowedPaths: user?.allowedPaths
                 }
             }
@@ -46,12 +47,14 @@ export const authOptions: AuthOptions = {
             if (user) {
                 token.role = user.role
                 token.allowedPaths = user.allowedPaths
+                token.defaultPath = user.defaultPath
             }
             return token
         },
         async session({ session, token }) {
             if (session.user) {
                 session.user.role = token.role as string
+                session.user.defaultPath = token.defaultPath as string
                 session.user.allowedPaths = token.allowedPaths as string[]
             }
             
@@ -61,7 +64,7 @@ export const authOptions: AuthOptions = {
 
     pages: {
         signIn: '/',
-        error: '/sign-in'
+        error: '/auth/login'
     },
 
     secret: process.env.NEXTAUTH_SECRET

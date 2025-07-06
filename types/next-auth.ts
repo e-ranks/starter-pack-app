@@ -9,12 +9,14 @@ declare module "next-auth" {
             image?: string | null
             role: string | null
             allowedPaths?: string[]
+            defaultPath?: string
         }
     }
 
     interface User {
         role: string | null
         allowedPaths?: string[]
+        defaultPath?: string
     }
 }
 
@@ -22,5 +24,6 @@ declare module "next-auth/jwt" {
     interface JWT {
         role: string | null
         allowedPaths?: string[]
+        defaultPath?: string
     }
 }
