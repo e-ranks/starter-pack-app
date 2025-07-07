@@ -27,7 +27,7 @@ export function LayoutShell({ children }: { children: React.ReactNode }) {
         <>
             <AppSidebar />
             <SidebarInset>
-                <div className="flex items-center justify-between w-full px-4">
+                <div className="flex items-center justify-between w-full px-4  mb-3">
                     <SidebarTrigger />
                     <div className="flex items-center gap-2">
                         <ModeToggle />

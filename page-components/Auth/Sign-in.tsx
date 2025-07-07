@@ -13,11 +13,14 @@ import { Label } from "@/components/ui/label"
 import { Button } from "@/components/ui/button"
 import React, { useEffect, useState } from "react"
 import { signIn, getSession } from "next-auth/react"
+import { validatePayload } from "@/utils/validatePayload"
+import { useTheme } from "next-themes"
 
 export function LoginForm({
     className,
     ...props
 }: React.ComponentProps<"div">) {
+    const { theme } = useTheme()
     const [name, setName] = useState<string>('')
     const [password, setPassword] = useState<string>('')
     const [checkingSession, setCheckingSession] = useState<boolean>(true)
@@ -38,6 +41,19 @@ export function LoginForm({
     }, [])
 
     const handleLogin = async () => {
+        const payload = {
+            name,
+            password
+        }
+
+        const validations = {
+            name: 'Name is required',
+            password: 'Password is required'
+        }
+
+        const isValid = await validatePayload(payload, validations, theme as 'light' | 'dark', 'warning')
+        if (!isValid) return
+
         const res = await signIn('credentials', {
             redirect: false,
             name,

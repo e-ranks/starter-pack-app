@@ -9,7 +9,20 @@ export default {
 	],
 	theme: {
 		extend: {
-
+			keyframes: {
+				fadeIn: {
+					from: { opacity: 0 },
+					to: { opacity: 1 },
+				},
+				slideIn: {
+					from: { opacity: 0, transform: 'translate(-50%, -48%) scale(0.95)' },
+					to: { opacity: 1, transform: 'translate(-50%, -50%) scale(1)' },
+				},
+			},
+			animation: {
+				fadeIn: 'fadeIn 200ms ease-out',
+				slideIn: 'slideIn 200ms ease-out',
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
